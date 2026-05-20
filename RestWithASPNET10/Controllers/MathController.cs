@@ -19,14 +19,26 @@ namespace RestWithASPNET10.Controllers
             return BadRequest("Invalid Input");
         }
 
-        private bool IsNumeric(string firstNumber)
+        private bool IsNumeric(string strNumber)
         {
-            throw new NotImplementedException();
+            double number;
+            bool isNumber = double.TryParse(
+                strNumber,
+                System.Globalization.NumberStyles.Any,
+                System.Globalization.NumberFormatInfo.InvariantInfo,
+                out number
+            );
+            return isNumber;
         }
 
-        private int CovertToDecimal(string firstNumber)
+        private decimal CovertToDecimal(string strNumber)
         {
-            throw new NotImplementedException();
+            decimal decimalValue;
+            if (decimal.TryParse(strNumber, out decimalValue))
+            {
+                return decimalValue;
+            }
+            return 0;
         }
     }
 }
