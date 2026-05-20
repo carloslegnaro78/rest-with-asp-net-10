@@ -8,7 +8,7 @@ namespace RestWithASPNET10.Controllers
     public class GreetingController : ControllerBase
     {
         private static long _counter = 0;
-        private static readonly string _template = "Hello, World! {0}";
+        private static readonly string _template = "Hello, {0}";
 
 
         [HttpGet]
