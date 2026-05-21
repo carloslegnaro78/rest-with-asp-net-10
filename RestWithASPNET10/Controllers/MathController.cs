@@ -1,100 +1,107 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RestWithASPNET10.Services;
+using RestWithASPNET10.Utils;
+
 
 namespace RestWithASPNET10.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class MathController : ControllerBase
     {
+        private readonly MathService _service;
+
+        public MathController(MathService service)
+        {
+            _service = service;
+        }
 
         [HttpGet("sum/{firstNumber}/{secondNumber}")]
-        public IActionResult Get(string firstNumber, string secondNumber)
+        public IActionResult Sum(string firstNumber, string secondNumber)
         {
-            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            if (NumberHelper.IsNumeric(firstNumber) && NumberHelper.IsNumeric(secondNumber))
             {
-                var sum = CovertToDecimal(firstNumber) + CovertToDecimal(secondNumber);
-                return Ok(sum.ToString());
+                var sum = _service.Sum(
+                    NumberHelper.ConvertToDecimal(firstNumber),
+                    NumberHelper.ConvertToDecimal(secondNumber)
+                );
+                return Ok(sum);
             }
-
-            return BadRequest("Invalid Input");
+            return BadRequest("Invalid Input!");
         }
 
         [HttpGet("subtraction/{firstNumber}/{secondNumber}")]
         public IActionResult Subtraction(string firstNumber, string secondNumber)
         {
-            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            if (NumberHelper.IsNumeric(firstNumber) && NumberHelper.IsNumeric(secondNumber))
             {
-                var sum = CovertToDecimal(firstNumber) - CovertToDecimal(secondNumber);
-                return Ok(sum.ToString());
-            }
 
-            return BadRequest("Invalid Input");
-        }
+                var subtraction = _service.Subtraction(
+                    NumberHelper.ConvertToDecimal(firstNumber),
+                    NumberHelper.ConvertToDecimal(secondNumber)
+                );
 
-        [HttpGet("division/{firstNumber}/{secondNumber}")]
-        public IActionResult Division(string firstNumber, string secondNumber)
-        {
-            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
-            {
-                var division = CovertToDecimal(firstNumber) / CovertToDecimal(secondNumber);
-                return Ok(division.ToString());
+                return Ok(subtraction);
             }
-            return Ok("Invalid Input");
+            return BadRequest("Invalid Input!");
         }
 
         [HttpGet("multiplication/{firstNumber}/{secondNumber}")]
         public IActionResult Multiplication(string firstNumber, string secondNumber)
         {
-            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            if (NumberHelper.IsNumeric(firstNumber) && NumberHelper.IsNumeric(secondNumber))
             {
-                var multiplication = CovertToDecimal(firstNumber) * CovertToDecimal(secondNumber);
-                return Ok(multiplication.ToString());
+                var multiplication = _service.Multiplication(
+                    NumberHelper.ConvertToDecimal(firstNumber),
+                    NumberHelper.ConvertToDecimal(secondNumber)
+                );
+                return Ok(multiplication);
             }
-            return Ok("Invalid Input");
+            return BadRequest("Invalid Input!");
         }
 
-        [HttpGet("mean/{firstNumber}/{secondNumber}")]
-        public IActionResult Mean(string firstNumber, string secondNumber)
+        [HttpGet("division/{firstNumber}/{secondNumber}")]
+        public IActionResult Division(string firstNumber, string secondNumber)
         {
-            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            if (NumberHelper.IsNumeric(firstNumber) && NumberHelper.IsNumeric(secondNumber))
             {
-                var mean = (CovertToDecimal(firstNumber) + CovertToDecimal(secondNumber)) / 2;
-                return Ok(mean.ToString());
+                var division = _service.Division(
+                    NumberHelper.ConvertToDecimal(firstNumber),
+                    NumberHelper.ConvertToDecimal(secondNumber)
+                );
+                return Ok(division);
             }
-            return Ok("Invalid Input");
+            return BadRequest("Invalid Input!");
         }
 
         [HttpGet("square-root/{number}")]
         public IActionResult SquareRoot(string number)
         {
-            if (IsNumeric(number))
+            if (NumberHelper.IsNumeric(number))
             {
-                var squareRoot = Math.Sqrt((double)CovertToDecimal(number));
-                return Ok(squareRoot.ToString());
+                var sqrt = _service.SquareRoot(
+                    NumberHelper.ConvertToDecimal(number)
+                );
+                return Ok(sqrt);
             }
-            return Ok("Invalid Input");
+            return BadRequest("Invalid Input!");
         }
 
-        private bool IsNumeric(string strNumber)
+
+        [HttpGet("mean/{firstNumber}/{secondNumber}")]
+        public IActionResult Mean(string firstNumber, string secondNumber)
         {
-            double number;
-            bool isNumber = double.TryParse(
-                strNumber,
-                System.Globalization.NumberStyles.Any,
-                System.Globalization.NumberFormatInfo.InvariantInfo,
-                out number
-            );
-            return isNumber;
+            if (NumberHelper.IsNumeric(firstNumber) && NumberHelper.IsNumeric(secondNumber))
+            {
+                var sum = _service.Mean(
+                    NumberHelper.ConvertToDecimal(firstNumber),
+                    NumberHelper.ConvertToDecimal(secondNumber)
+                );
+                return Ok(sum);
+            }
+            return BadRequest("Invalid Input!");
         }
 
-        private decimal CovertToDecimal(string strNumber)
-        {
-            decimal decimalValue;
-            if (decimal.TryParse(strNumber, out decimalValue))
-            {
-                return decimalValue;
-            }
-            return 0;
-        }
+
     }
 }
