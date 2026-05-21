@@ -2,7 +2,6 @@
 using RestWithASPNET10.Services;
 using RestWithASPNET10.Utils;
 
-
 namespace RestWithASPNET10.Controllers
 {
     [ApiController]
