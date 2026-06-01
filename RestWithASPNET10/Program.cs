@@ -1,3 +1,4 @@
+using RestWithASPNET10.Configurations;
 using RestWithASPNET10.Model.Impl;
 using RestWithASPNET10.Services;
 
@@ -7,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddDatabaseConfiguration(builder.Configuration);
 builder.Services.AddScoped<IPersonServices, PersonServicesImpl>();
+
 
 var app = builder.Build();
 
