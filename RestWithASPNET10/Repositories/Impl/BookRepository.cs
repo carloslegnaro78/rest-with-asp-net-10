@@ -1,49 +1,39 @@
 ﻿using RestWithASPNET10.Model;
-using RestWithASPNET10.Model.Context;
+using RestWithASPNET10Erudio.Repositories;
 
-namespace RestWithASPNET10.Repositories.Impl
+namespace RestWithASPNET10.Services.Impl
 {
-    public class BookRepository : IBookRepository
+    public class BookServicesImpl : IBookServices
     {
+        private IBookRepository _repository;
 
-        private MSSQLContext _context;
-
-        public BookRepository(MSSQLContext context)
+        public BookServicesImpl(IBookRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
+
         public List<Book> FindAll()
         {
-            return _context.Books.ToList();
+            return _repository.FindAll();
         }
 
         public Book FindById(long id)
         {
-            return _context.Books.Find(id);
+            return _repository.FindById(id);
         }
 
         public Book Create(Book book)
         {
-            _context.Add(book);
-            _context.SaveChanges();
-            return book;
+            return _repository.Create(book);
         }
 
         public Book Update(Book book)
         {
-            var existingBook = _context.Books.Find(book.Id);
-            if (existingBook == null) return null;
-
-            _context.Entry(existingBook).CurrentValues.SetValues(book);
-            _context.SaveChanges();
-            return book;
+            return _repository.Update(book);
         }
         public void Delete(long id)
         {
-            var existingBook = _context.Books.Find(id);
-            if (existingBook == null) return;
-            _context.Remove(existingBook);
-            _context.SaveChanges();
+            _repository.Delete(id);
         }
     }
 }
