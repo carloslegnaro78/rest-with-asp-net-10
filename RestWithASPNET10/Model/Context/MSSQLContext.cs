@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestWithASPNET10.Model;
 
 namespace RestWithASPNET10.Model.Context
 {
