@@ -1,6 +1,6 @@
 ﻿using RestWithASPNET10.Model;
 
-namespace RestWithASPNET10Erudio.Repositories
+namespace RestWithASPNET10.Repositories
 {
     public interface IBookRepository
     {

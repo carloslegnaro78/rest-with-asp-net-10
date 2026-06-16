@@ -1,6 +1,5 @@
 ﻿using RestWithASPNET10.Model;
 using RestWithASPNET10.Model.Context;
-using RestWithASPNET10Erudio.Repositories;
 
 namespace RestWithASPNET10.Repositories.Impl
 {

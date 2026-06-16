@@ -1,15 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RestWithASPNET10.Model.Base;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestWithASPNET10.Model
 {
-    [Table("Person")]
-    public class Person
+    [Table("person")]
+    public class Person : BaseEntity
     {
-        [Key]
-        [Column("id")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
 
         [Required]
         [Column("first_name", TypeName = "varchar(80)")]

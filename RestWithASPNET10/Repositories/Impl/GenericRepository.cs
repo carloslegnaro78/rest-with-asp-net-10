@@ -3,7 +3,7 @@ using RestWithASPNET10.Model.Base;
 using RestWithASPNET10.Model.Context;
 using RestWithASPNET10.Repositories;
 
-namespace RestWithASPNET10Erudio.Repositories.Impl
+namespace RestWithASPNET10.Repositories.Impl
 {
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
