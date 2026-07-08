@@ -2,7 +2,7 @@
 
 namespace RestWithASPNET10.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/v1")]
     [ApiController]
     public class TestLogsController : ControllerBase
     {

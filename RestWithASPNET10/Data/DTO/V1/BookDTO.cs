@@ -1,4 +1,4 @@
-﻿namespace RestWithASPNET10.Data.DTO
+﻿namespace RestWithASPNET10.Data.DTO.V1
 {
 
     public class BookDTO
