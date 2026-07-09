@@ -1,5 +1,5 @@
 ﻿using RestWithASPNET10.Data.Converter.Contract;
-using RestWithASPNET10.Data.DTO.V1;
+using RestWithASPNET10.Data.DTO.V2;
 using RestWithASPNET10.Model;
 
 namespace RestWithASPNET10.Data.Converter.Impl
@@ -15,7 +15,8 @@ namespace RestWithASPNET10.Data.Converter.Impl
                 FirstName = origin.FirstName,
                 LastName = origin.LastName,
                 Address = origin.Address,
-                Gender = origin.Gender
+                Gender = origin.Gender,
+                // BirthDay = origin.BirthDay
             };
         }
 
@@ -28,7 +29,10 @@ namespace RestWithASPNET10.Data.Converter.Impl
                 FirstName = origin.FirstName,
                 LastName = origin.LastName,
                 Address = origin.Address,
-                Gender = origin.Gender
+                Gender = origin.Gender,
+                BirthDay = DateTime.Now
+                // Mocking a birthday since the Person entity does not have this field.
+                //BirthDay = origin.BirthDay ?? DateTime.Now
             };
         }
 
