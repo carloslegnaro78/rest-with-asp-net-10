@@ -49,6 +49,8 @@ namespace RestWithASPNET10.Controllers.V1
                 _logger.LogError("Failed to create book with name {firstName}", book.Title);
                 return NotFound();
             }
+            Response.Headers.Add("X-API-Deprecated", "true");
+            Response.Headers.Add("X-API-Deprecation-Date", "2026-12-31");
             return Ok(createdBook);
         }
 
