@@ -1,14 +1,32 @@
-﻿using System.Data;
+﻿using System.Text.Json.Serialization;
 
 namespace RestWithASPNET10.Data.DTO.V2
 {
     public class PersonDTO
     {
+        [JsonPropertyName("code")]
+        [JsonPropertyOrder(1)]
         public long Id { get; set; }
+
+
+        [JsonPropertyName("first_name")]
+        [JsonPropertyOrder(3)]
         public string FirstName { get; set; }
+
+        [JsonPropertyName("last_name")]
+        [JsonPropertyOrder(4)]
         public string LastName { get; set; }
+
+        [JsonPropertyOrder(2)]
         public string Address { get; set; }
+
+
+        [JsonPropertyOrder(5)]
         public string Gender { get; set; }
+
+
+        [JsonPropertyOrder(6)]
+        // [JsonIgnore]
         public DateTime? BirthDay { get; set; }
     }
 }
