@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using RestWithASPNET10.JsonSerializers;
+﻿using RestWithASPNET10.JsonSerializers;
 using System.Text.Json.Serialization;
 
 namespace RestWithASPNET10.Data.DTO.V2
@@ -24,12 +23,13 @@ namespace RestWithASPNET10.Data.DTO.V2
 
 
         [JsonPropertyOrder(5)]
+        [JsonConverter(typeof(GenderSerializer))]
         public string Gender { get; set; }
 
 
         [JsonPropertyOrder(6)]
         // [JsonIgnore]
-        [JsonConverter(typeof(DateSerializer))]
+        // [JsonConverter(typeof(DateOnlySerializer))]
         public DateTime? BirthDay { get; set; }
     }
 }
