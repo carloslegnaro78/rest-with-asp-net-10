@@ -8,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddSerilogLogging();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddContentNegotiation();
 
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
 builder.Services.AddEvolveConfiguration(builder.Configuration, builder.Environment);
@@ -19,12 +20,14 @@ builder.Services.AddScoped<PersonServicesImplV2>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
-builder.Services.AddScoped<IBookRepository, BookRepository>();
-
 var app = builder.Build();
 
+// Configure the HTTP request pipeline.
+
 app.UseHttpsRedirection();
+
 app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
