@@ -18,7 +18,7 @@ namespace RestWithASPNET10.Controllers.V2
             _logger = logger;
         }
 
-        
+
         [HttpPost]
         public IActionResult Post([FromBody] PersonDTO person)
         {
@@ -30,6 +30,9 @@ namespace RestWithASPNET10.Controllers.V2
                 _logger.LogError("Failed to create person with name {firstName}", person.FirstName);
                 return NotFound();
             }
+            // createdPerson.LastName = null;
+            // createdPerson.Age = 0;
+            createdPerson.Age = 20;
             return Ok(createdPerson);
         }
     }
