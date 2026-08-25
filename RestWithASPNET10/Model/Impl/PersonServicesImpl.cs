@@ -1,5 +1,8 @@
-﻿using RestWithASPNET10.Model;
+﻿using Mapster;
+using RestWithASPNET10.Data.DTO.V1;
+using RestWithASPNET10.Model;
 using RestWithASPNET10.Repositories;
+
 
 namespace RestWithASPNET10.Services.Impl
 {
@@ -7,30 +10,33 @@ namespace RestWithASPNET10.Services.Impl
     {
 
         private IRepository<Person> _repository;
-
         public PersonServicesImpl(IRepository<Person> repository)
         {
             _repository = repository;
         }
 
-        public List<Person> FindAll()
+        public List<PersonDTO> FindAll()
         {
-            return _repository.FindAll();
+            return _repository.FindAll().Adapt<List<PersonDTO>>();
         }
 
-        public Person FindById(long id)
+        public PersonDTO FindById(long id)
         {
-            return _repository.FindById(id);
+            return _repository.FindById(id).Adapt<PersonDTO>();
         }
 
-        public Person Create(Person person)
+        public PersonDTO Create(PersonDTO person)
         {
-            return _repository.Create(person);
+            var entity = person.Adapt<Person>();
+            entity = _repository.Create(entity);
+            return entity.Adapt<PersonDTO>();
         }
 
-        public Person Update(Person person)
+        public PersonDTO Update(PersonDTO person)
         {
-            return _repository.Update(person);
+            var entity = person.Adapt<Person>();
+            entity = _repository.Update(entity);
+            return entity.Adapt<PersonDTO>();
         }
         public void Delete(long id)
         {

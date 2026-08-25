@@ -20,6 +20,9 @@ namespace RestWithASPNET10.Controllers.V2
 
 
         [HttpPost]
+        [ProducesResponseType(200, Type = typeof(PersonDTO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public IActionResult Post([FromBody] PersonDTO person)
         {
             _logger.LogInformation("Creating new Person: {firstName}", person.FirstName);
@@ -30,9 +33,6 @@ namespace RestWithASPNET10.Controllers.V2
                 _logger.LogError("Failed to create person with name {firstName}", person.FirstName);
                 return NotFound();
             }
-            // createdPerson.LastName = null;
-            // createdPerson.Age = 0;
-            createdPerson.Age = 20;
             return Ok(createdPerson);
         }
     }
