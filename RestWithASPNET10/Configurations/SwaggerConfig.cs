@@ -19,14 +19,14 @@ namespace RestWithASPNET10.Configurations
                     Description = AppDescription,
                     Contact = new OpenApiContact
                     {
-                        Name = "Erudio",
-                        Email = "contato@erudio.com.br",
-                        Url = new Uri("https://pub.erudio.com.br/meus-cursos")
+                        Name = "LegSoft",
+                        Email = "carloslegnaro@gmail.com",
+                        Url = new Uri("https://www.linkedin.com/in/carloslegnaro/")
                     },
                     License = new OpenApiLicense
                     {
                         Name = "MIT",
-                        Url = new Uri("https://pub.erudio.com.br/meus-cursos")
+                        Url = new Uri("https://www.linkedin.com/in/carloslegnaro/")
                     }
                 });
 

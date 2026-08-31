@@ -11,24 +11,34 @@ builder.AddSerilogLogging();
 builder.Services.AddControllers()
     .AddContentNegotiation();
 
-
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddOpenAPIConfig();
 builder.Services.AddSwaggerConfig();
 builder.Services.AddRouteConfig();
 
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
-builder.Services.AddEvolveConfiguration(builder.Configuration, builder.Environment);
+builder.Services.AddEvolveConfiguration(
+    builder.Configuration,
+    builder.Environment);
 
 builder.Services.AddScoped<IPersonServices, PersonServicesImpl>();
 builder.Services.AddScoped<IBookServices, BookServicesImpl>();
 builder.Services.AddScoped<PersonServicesImplV2>();
 
-builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(
+    typeof(IRepository<>),
+    typeof(GenericRepository<>));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Pipeline
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwaggerSpecification();
+    app.UseScalarConfiguration();
+}
 
 app.UseHttpsRedirection();
 
@@ -36,8 +46,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseSwaggerSpecification();
-app.UseScalarConfiguration();
+// Rota para teste
+app.MapGet("/", () => Results.Redirect("/scalar/v1"));
 
 app.Run();
-
