@@ -1,11 +1,14 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi;
 
 namespace RestWithASPNET10.Configurations
 {
     public static class OpenAPIConfig
     {
-        private static readonly string AppName = "ASP.NET 2026 REST API's from 0 to Azure and GCP with .NET 10, Docker e Kubernetes";
-        private static readonly string AppDescription = $"REST API RESTful developed in course {AppName}";
+        private static readonly string AppName =
+            "ASP.NET 2026 REST API's from 0 to Azure and GCP with .NET 10, Docker e Kubernetes";
+
+        private static readonly string AppDescription =
+            $"REST API RESTful developed in course {AppName}";
 
         public static IServiceCollection AddOpenAPIConfig(
             this IServiceCollection services)
@@ -26,6 +29,7 @@ namespace RestWithASPNET10.Configurations
                     Url = new Uri("https://pub.erudio.com.br/meus-cursos")
                 }
             });
+
             return services;
         }
     }
